@@ -1,0 +1,36 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#calculadora{
+    background-color: grey;
+    width:250px;
+    margin: 50px auto;
+    padding: 20px 20px 0 20px;
+    border-radius: 10px;
+}
+
+#display{
+    width:100%;
+    text-align: right;
+    background-color: aqua;
+    margin-bottom: 20px;
+    font-size: 3em;
+    border-radius: 10px;
+}
+
+.linea{
+    margin: auto;
+}
+
+button{
+    width: 20%;
+    height: 30px;
+    margin: 1.9%;
+    border-radius:10px;
+}
+
+#delete{
+    width: 45%
+}

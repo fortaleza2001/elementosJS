@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventana Principal</title>
+    <script>
+        let ventana;
+
+        function abrirVentana() {
+            // Abrir la ventana emergente
+            ventana = window.open('ventana.html', '', 'width=300,height=300,left=30,top=30');
+            
+            // Esperar hasta que la ventana emergente esté cargada
+            ventana.onload = function() {
+                let count = 0;
+
+                // Actualizar el contador en la ventana emergente cada 2 segundos
+                const interval = setInterval(() => {
+                    count++;
+                    ventana.document.querySelector('.rep').innerText = `Parrafo de repeticiones: ${count}`;
+                }, 2000);
+
+                // Actualizar el párrafo de tiempo a los 10 segundos
+                setTimeout(() => {
+                    ventana.document.querySelector('.tiempo').innerText = 'Parrafo de tiempo: 1';
+                }, 10000);
+
+                // Detectar cuando la ventana emergente se cierra
+                ventana.onbeforeunload = function() {
+                    alert('Se ha cerrado la ventana de la caja roja.');
+                    clearInterval(interval); // Detener el contador cuando la ventana se cierre
+                };
+            };
+        }
+    </script>
+</head>
+<body>
+    <button onclick="abrirVentana()">Abrir Ventana</button>
+</body>
+</html>

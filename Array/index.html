@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function recorrer(frutas){
+        frutas.forEach((element,ind) => {
+            console.log(element+" es la futa nº"+ind);
+            
+        });
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        let frutas=[];
+        let cajaFruta=document.getElementById("cajaFruta");
+
+        document.getElementById("ponerfinal").addEventListener("click",function(){
+            console.clear();
+            if((cajaFruta.value!="")&&(!(frutas.includes(cajaFruta.value)))){
+                frutas.push(cajaFruta.value);
+            }
+            recorrer(frutas);
+            
+        });
+
+        document.getElementById("quitarfinal").addEventListener("click",function(){
+            console.clear();
+            if(frutas.length>0){
+                frutas.pop();
+            }
+            recorrer(frutas);
+        });
+
+        document.getElementById("ponerprincipio").addEventListener("click",function(){
+            console.clear();
+            if((cajaFruta.value!="")&&(!(frutas.includes(cajaFruta.value)))){
+                frutas.push(cajaFruta.value);
+            }
+            recorrer(frutas);
+            
+        });
+
+        document.getElementById("quitarprincipio").addEventListener("click",function(){
+            console.clear();
+            if(frutas.length>0){
+                frutas.shift();
+            }
+            recorrer(frutas);
+        });
+    });
+</script>
+<body>
+    <input type="text" placeholder="Añade una fruta" id="cajaFruta">
+    <input type="button" value="Añadir Final" id="ponerfinal">
+    <input type="button" value="Eliminar Final" id="quitarfinal">
+    <input type="button" value="Añadir Principio" id="ponerprincipio">
+    <input type="button" value="Eliminar Principio" id="quitarprincipio">
+</body>
+</html>

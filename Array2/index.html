@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function recorrer(frutas){
+        frutas.forEach((element,ind) => {
+            console.log(element+" es la futa nº"+ind);
+            
+        });
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        let frutas=[];
+        let cajaFruta=document.getElementById("cajaFruta");
+        let cajaPOS=document.getElementById("posicion");
+
+        document.getElementById("poner").addEventListener("click",function(){
+            console.clear();
+            cajaFruta.style.backgroundColor="White"
+            cajaPOS.style.backgroundColor="White"
+            let fruta=cajaFruta.value;
+            let posicion=cajaPOS.value;
+            if((fruta!="")&&(posicion!="")){
+                if(frutas.includes(fruta)){
+                    alert("La fruta ya esta añadida")
+                }else{
+                   while((posicion<0)||(posicion>frutas.length)){
+                        posicion=prompt("Posición no valida\n Introduzca una posición valida")
+                    }
+                    
+                    frutas.splice(cajaPOS.value,0,cajaFruta.value)}
+                
+                
+                
+            }else{ 
+                if(cajaFruta.value==""){
+                cajaFruta.style.backgroundColor="Pink"
+                }
+                if(cajaPOS.value==""){
+                cajaPOS.style.backgroundColor="Pink"
+                }
+            }
+            recorrer(frutas);
+            
+        });
+
+        
+    });
+</script>
+<body>
+    <input type="text" placeholder="Añade una fruta" id="cajaFruta">
+    <input type="number" placeholder="POS" id="posicion">
+    <input type="button" value="Añadir" id="poner">
+</body>
+</html>

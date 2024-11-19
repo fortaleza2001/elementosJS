@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        *{
+            margin: 0;
+        }
+        #caja{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            position: absolute;
+        }
+    </style>
+<body>
+    <div id="caja">
+
+    </div>
+</body>
+    <script>
+        let caja=document.querySelector("#caja");
+        
+        caja.addEventListener("mousedown",(evento)=>{
+            let inicialCajaY=caja.getBoundingClientRect().top;
+            let inicialCajaX=caja.getBoundingClientRect().left;
+            let ratonX=evento.clientX;
+            let ratonY=evento.clientY;            
+            document.addEventListener("mousemove",mover=(evento)=>{
+                let movimientoX=ratonX-evento.clientX;
+                let movimientoY=ratonY-evento.clientY;
+                caja.style.top=(inicialCajaY-movimientoY)+"px";
+                caja.style.left=(inicialCajaX-movimientoX)+"px";
+            })
+
+            
+        });
+        document.addEventListener("mouseup",(evento)=>{
+                document.removeEventListener("mousemove",mover)
+        })
+
+
+    </script>
+</html>

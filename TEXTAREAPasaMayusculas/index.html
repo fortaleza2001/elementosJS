@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #principal{
+        position: absolute;
+        left: 0;
+    }
+    #secundaria{
+        position: absolute;
+        right: 0;
+    }
+</style>
+<body>
+    <textarea name="" id="principal" cols="100" rows="40"></textarea>
+    <textarea name="" id="secundaria" cols="100" rows="40" disabled></textarea>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded",()=>{
+        const principal=document.querySelector("#principal");
+        const secundaria=document.querySelector("#secundaria");
+
+        principal.addEventListener("input",()=>{
+            let texto=principal.value;
+            secundaria.value=texto.toUpperCase();
+        })
+
+    })
+</script>
+</html>
