@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #seleccion{
+            width: 20vw;
+            display: flex;
+            margin: auto;
+            justify-content: space-around;
+        }
+        input[type=number]{
+            width: 3rem;
+        }
+        #cajaDias{
+            width: 20vw;
+            text-align: center;
+            font-size: 1rem;
+            color: green;
+            margin: auto;
+            border:1px black solid
+        }
+    </style>
+</head>
+<body>
+    <div id="seleccion">
+        <select id="dia">
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miercoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sabado</option>
+            <option value="0">Domingo</option>
+        </select>
+        <input type="number" id="numero" min="1">
+        <input type="button" value="Pulsar" id="boton" disabled>
+    </div>
+    <div id="cajaDias"></div>
+    <script>
+
+        function nombreMes(mes){
+            switch (mes){
+                case 0:
+                    return "Enero";
+
+                case 1:
+                    return "Febrero";
+                
+                case 2:
+                    return "Marzo";
+                
+                case 3:
+                    return "Abril";
+                
+                case 4:
+                    return "Mayo";
+                
+                case 5:
+                    return "Junio";
+                
+                case 6:
+                    return "Julio";
+                
+                case 7:
+                    return "Agosto";
+                
+                case 8:
+                    return "Septiembre";
+                
+                case 9:
+                    return "Octubre";
+                
+                case 10:
+                    return "Noviembre";
+                
+                case 11:
+                    return "Diciembre";
+                
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            
+            const dia=document.getElementById("dia");
+            const numero=document.getElementById("numero");
+            const boton=document.getElementById("boton");
+            const cajaDias=document.getElementById("cajaDias");
+           
+
+            numero.addEventListener("input",()=>{
+                if (numero.value >0){
+                    boton.disabled=false;
+                }else{
+                    boton.disabled=true;
+                }
+            })
+            
+
+            boton.addEventListener("click",()=>{
+                cajaDias.innerHTML="";
+                let diaFecha=new Date();
+                let diaSeleccionado=dia.value
+                let diaSeleccionadoTexto=dia.options[dia.selectedIndex].textContent;
+                
+                let dias;
+                if(diaFecha.getDay()>dia.value){
+                    dias=(7-diaFecha.getDay())+parseInt(dia.value);
+                    diaFecha.setDate(diaFecha.getDate()+dias);
+                }else{
+                    dias=dia.value-diaFecha.getDay()
+                    diaFecha.setDate(diaFecha.getDate()+dias);
+                    
+                }
+                cajaDias.innerHTML+="<p>Los proximos "+numero.value+" "+diaSeleccionadoTexto+" son:</p>"
+                cajaDias.innerHTML+="<p>"+diaFecha.getDate()+" de "+nombreMes(diaFecha.getMonth())+"</p>"; 
+
+               for(let i=1;i<numero.value;i++){
+                    diaFecha.setDate(diaFecha.getDate()+7);
+                    cajaDias.innerHTML+="<p>"+diaFecha.getDate()+" de "+nombreMes(diaFecha.getMonth())+"</p>"; 
+                }
+                
+            })
+        })
+    </script>
+</body>
+
+</html>

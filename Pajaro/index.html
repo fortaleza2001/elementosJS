@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pajaro</title>
+    <style>
+        *{
+            margin: 0;
+            background-color: #E9F0F2;
+        }
+        #pajaro{
+            background-image: url(bird.jpg);
+            width: 50px;
+            height: 49px;
+            background-position-x:0px;
+            position: absolute;
+            animation: volar 0.5s steps(1) infinite;
+        }
+        @keyframes volar{
+            0%{background-position-x:0px;
+                background-position-y:0px;}
+            17%{background-position-x:50px;
+                background-position-y:0px;}
+            33%{background-position-x:100px;
+                background-position-y:0px;}
+            50%{background-position-x:0px;
+                background-position-y:49px;}
+            67%{background-position-x:50px;
+                background-position-y:49px;}
+            83%{background-position-x:100px;
+                background-position-y:49px;}
+            
+        }
+        #contador{
+            border: solid red 3px;
+            color: green;
+            height: 8vh;
+            width: 4vw;
+            position: absolute;
+            left: 48vw;
+            font-size: 3em;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="pajaro"></div>
+    <div id="contador"></div>
+</body>
+    <script>
+        let parar;
+        let pajaro=document.getElementById("pajaro");
+        let tiempo=1000;
+        let puntos=0;
+        function mover(){
+            let posy=Math.floor(Math.random()*100);
+            let posx=Math.floor(Math.random()*100);
+            pajaro.style.top=posy+"vh"
+            pajaro.style.left=posx+"vw"
+        }
+        document.addEventListener("DOMContentLoaded",()=>{
+            document.getElementById("contador").innerText=puntos;
+            parar=setInterval(mover,tiempo);
+            pajaro.addEventListener("click",()=>{
+                clearInterval(parar);
+                puntos++;
+                document.getElementById("contador").innerText=puntos;
+                tiempo-=100;
+                parar=setInterval(mover,tiempo);
+            })
+
+        })
+    </script>
+</html>

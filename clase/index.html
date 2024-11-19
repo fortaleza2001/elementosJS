@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Box en JavaScript</title>
+    <style>
+        #box {
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clase Box en JavaScript</h1>
+
+    <button id="createBoxBtn">Crear una Caja</button>
+    <button id="resizeBoxBtn">Cambiar Tamaño</button>
+    <button id="moveBoxBtn">Mover Caja</button>
+    <button id="showInfoBtn">Mostrar Información</button>
+
+    <div id="output" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;"></div>
+    <div id="box"></div>
+
+    <script>
+        // Clase Box
+        class Box {
+            constructor(width, height, color, x = 0, y = 0) {
+                this.width = width; // Ancho de la caja
+                this.height = height; // Alto de la caja
+                this.color = color; // Color de la caja
+                this.x = x; // Posición X
+                this.y = y; // Posición Y
+            }
+
+            // Cambiar tamaño
+            resize(newWidth, newHeight) {
+                this.width = newWidth;
+                this.height = newHeight;
+            }
+
+            // Cambiar posición
+            move(newX, newY) {
+                this.x = newX;
+                this.y = newY;
+            }
+
+            // Obtener información de la caja
+            getInfo() {
+                return `Caja:
+                    Tamaño: ${this.width}x${this.height}
+                    Color: ${this.color}
+                    Posición: (${this.x}, ${this.y})`;
+            }
+        }
+
+        // Crear una instancia inicial de la clase Box
+        let box = null;
+
+        // Referencia al elemento visual de la caja
+        const boxElement = document.getElementById("box");
+
+        // Salida de texto
+        const output = document.getElementById("output");
+
+        // Crear una caja
+        document.getElementById("createBoxBtn").addEventListener("click", () => {
+            box = new Box(100, 100, "red");
+            updateBoxElement();
+            output.innerHTML = `¡Caja creada!<br>${box.getInfo()}`;
+        });
+
+        // Cambiar tamaño de la caja
+        document.getElementById("resizeBoxBtn").addEventListener("click", () => {
+            if (box) {
+                const newWidth = Math.floor(Math.random() * 200) + 50; // Ancho aleatorio
+                const newHeight = Math.floor(Math.random() * 200) + 50; // Alto aleatorio
+                box.resize(newWidth, newHeight);
+                updateBoxElement();
+                output.innerHTML = `¡Tamaño cambiado!<br>${box.getInfo()}`;
+            } else {
+                output.textContent = "Primero necesitas crear una caja.";
+            }
+        });
+
+        // Mover la caja
+        document.getElementById("moveBoxBtn").addEventListener("click", () => {
+            if (box) {
+                const newX = Math.floor(Math.random() * 500); // Nueva posición X aleatoria
+                const newY = Math.floor(Math.random() * 500); // Nueva posición Y aleatoria
+                box.move(newX, newY);
+                updateBoxElement();
+                output.innerHTML = `¡Caja movida!<br>${box.getInfo()}`;
+            } else {
+                output.textContent = "Primero necesitas crear una caja.";
+            }
+        });
+
+        // Mostrar información de la caja
+        document.getElementById("showInfoBtn").addEventListener("click", () => {
+            if (box) {
+                output.innerHTML = box.getInfo();
+            } else {
+                output.textContent = "Primero necesitas crear una caja.";
+            }
+        });
+
+        // Actualizar la representación visual de la caja
+        function updateBoxElement() {
+            if (box) {
+                boxElement.style.width = box.width + "px";
+                boxElement.style.height = box.height + "px";
+                boxElement.style.backgroundColor = box.color;
+                boxElement.style.left = box.x + "px";
+                boxElement.style.top = box.y + "px";
+                boxElement.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

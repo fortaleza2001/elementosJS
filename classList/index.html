@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación de Clases</title>
+    <style>
+        .box { width: 100px; height: 100px; margin: 10px; display: inline-block; border: 1px solid black; }
+        .red { background-color: red; }
+        .blue { background-color: blue; }
+        .green { background-color: green; }
+        .highlight { border: 3px solid yellow; }
+    </style>
+</head>
+<body>
+    <h1>Manipulación de Clases</h1>
+
+    <!-- Elementos para interactuar -->
+    <div class="box red" id="box1"></div>
+    <div class="box blue" id="box2"></div>
+    <div class="box green" id="box3"></div>
+    <div class="box" id="box4"></div>
+
+    <button id="addClassBtn">Añadir Clase</button>
+    <button id="removeClassBtn">Eliminar Clase</button>
+    <button id="checkClassBtn">Verificar Clase</button>
+    <button id="getElementsBtn">Obtener Elementos por Clase</button>
+
+    <h2>Resultados:</h2>
+    <div id="output" style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;"></div>
+
+    <script>
+        const output = document.getElementById("output");
+
+        // Añadir una clase a un elemento
+        document.getElementById("addClassBtn").addEventListener("click", () => {
+            const box1 = document.getElementById("box1");
+            box1.classList.add("highlight");
+            output.textContent = `Clase "highlight" añadida al elemento con ID "box1". Clases actuales: ${box1.className}`;
+        });
+
+        // Eliminar una clase de un elemento
+        document.getElementById("removeClassBtn").addEventListener("click", () => {
+            const box2 = document.getElementById("box2");
+            box2.classList.remove("blue");
+            output.textContent = `Clase "blue" eliminada del elemento con ID "box2". Clases actuales: ${box2.className}`;
+        });
+
+        // Verificar si un elemento tiene una clase
+        document.getElementById("checkClassBtn").addEventListener("click", () => {
+            const box3 = document.getElementById("box3");
+            const hasGreen = box3.classList.contains("green");
+            output.textContent = hasGreen
+                ? `El elemento con ID "box3" tiene la clase "green".`
+                : `El elemento con ID "box3" no tiene la clase "green".`;
+        });
+
+        // Obtener elementos por clase, convertir en array y mapear
+        document.getElementById("getElementsBtn").addEventListener("click", () => {
+            const elements = document.querySelectorAll(".box"); // Obtiene todos los elementos con la clase "box"
+            const elementsArray = Array.from(elements); // Convierte la NodeList en un array
+            const transformed = elementsArray.map((el, index) => {
+                el.textContent = `Box ${index + 1}`; // Cambia el texto dentro de cada elemento
+                el.style.border = "2px dashed orange"; // Cambia el estilo del borde
+                return `Elemento ${index + 1}: ${el.className}`;
+            });
+
+            output.innerHTML = `
+                <strong>Elementos obtenidos por clase "box":</strong><br>
+                ${transformed.join("<br>")}
+            `;
+        });
+    </script>
+</body>
+</html>

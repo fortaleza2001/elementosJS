@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primera pagina</title>
+    
+<style>
+    *{
+        margin: 0;
+    }
+    div{
+        height: 30px;
+        width: 0;
+        background-color: black;
+    }
+</style>
+</head>
+<script>
+    let tiempo; //Variable donde se guarda el identificador de setInterval
+    let ancho=0; //Ancho inicial del div
+    let boton //Variable del botón
+    function crecer(){ //Función que hace crecer el DIV
+        ancho+=10;
+        document.getElementById("caja").style.width=ancho+"px"; 
+        boton.disabled=true; //Deshabilitamos el botón para que no se vuelva a lanzar
+    }
+    document.addEventListener("DOMContentLoaded",()=>{ //Espera a que se cargue el DOM
+        boton=document.getElementById("boton");
+        let parar=document.getElementById("parar");
+        boton.addEventListener("click",()=>{ //Cuando hacemos click cargamos el botón
+            tiempo=setInterval(crecer,1000);
+        })
+        parar.addEventListener("click",()=>{ //Para parar el crecimiento
+            clearInterval(tiempo);
+            boton.disabled=false;
+        })
+    });
+</script>
+<body>
+    <div id="caja"></div>
+    <button id="boton">Epmpezar</button>
+    <button id="parar">parar</button>
+</body>
+
+
+
+</html>

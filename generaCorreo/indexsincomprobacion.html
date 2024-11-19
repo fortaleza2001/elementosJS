@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        #principal{
+            display: flex;
+            justify-content: space-around;
+            width: 30vw;
+            margin:auto;
+            row-gap: 5px;
+            flex-direction: column;
+        }
+        #correos{
+            display: flex;
+            text-align: center;
+            width: 30vw;
+            margin:auto;
+            row-gap: 5px;
+            flex-direction: column;
+            font-size: 1rem;
+            color: blue;
+        }
+    </style>
+<body>
+    <div id="principal">
+        <input type="text" placeholder="Nombre" id="nombre">
+        <input type="text" placeholder="Apellido" id="apellido">
+        <input type="button" value="Pulsar" id="boton">
+    </div>
+    <div id="correos">
+    </div>
+</body>
+<script>
+   
+    document.addEventListener("DOMContentLoaded",()=>{
+        const nombre=document.getElementById("nombre");
+        const apellido=document.getElementById("apellido");
+        const boton=document.getElementById("boton");
+        const correos=document.getElementById("correos")
+
+        boton.addEventListener("click",()=>{
+            direcciones=document.querySelectorAll("p");
+            let nombreTexto=nombre.value;
+            letra=nombreTexto.charAt(0);
+            letra=letra.toLowerCase()
+            apellidosTexto=apellido.value;
+            apellidos=apellidosTexto.split(" ");
+            direccion=letra+"."+apellidos[0].toLowerCase()+"@cpilosenlaces.com"
+            correos.innerHTML+="<p>"+direccion+"</p>"
+            
+        })
+    })
+</script>
+</html>

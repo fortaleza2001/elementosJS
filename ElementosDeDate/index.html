@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos avanzados de Date</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplos Avanzados del Objeto Date</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Función</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+            </tr>
+        </thead>
+        <tbody id="examplesTable"></tbody>
+    </table>
+
+    <script>
+        function generateAdvancedDateExamples() {
+            const today = new Date();
+            const pastDate = new Date(2020, 10, 19); // 19 Noviembre 2020
+
+            const examples = [
+                // Fecha actual
+                {
+                    function: "new Date()",
+                    description: "Crea una nueva instancia de Date con la fecha y hora actual.",
+                    example: today.toString()
+                },
+                // Diferencia de años
+                {
+                    function: "Diferencia de años",
+                    description: "Calcula la diferencia de años entre dos fechas.",
+                    example: `La diferencia en años es ${today.getFullYear() - pastDate.getFullYear()}`
+                },
+                // Diferencia de meses
+                {
+                    function: "Diferencia de meses",
+                    description: "Calcula la diferencia de meses entre dos fechas.",
+                    example: (() => {
+                        const yearDiff = today.getFullYear() - pastDate.getFullYear();
+                        const monthDiff = today.getMonth() - pastDate.getMonth();
+                        return `La diferencia en meses es ${(yearDiff * 12) + monthDiff}`;
+                    })()
+                },
+                // Diferencia de días
+                {
+                    function: "Diferencia de días",
+                    description: "Calcula la diferencia de días entre dos fechas.",
+                    example: (() => {
+                        const diffTime = Math.abs(today - pastDate); // Diferencia en milisegundos
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convertir a días
+                        return `La diferencia en días es ${diffDays}`;
+                    })()
+                },
+                // Formato de fecha (toLocaleDateString)
+                {
+                    function: "toLocaleDateString()",
+                    description: "Devuelve la fecha en formato local.",
+                    example: today.toLocaleDateString()
+                },
+                // Formato de fecha (toISOString)
+                {
+                    function: "toISOString()",
+                    description: "Devuelve la fecha en formato ISO 8601.",
+                    example: today.toISOString()
+                },
+                // Formato personalizado
+                {
+                    function: "Formato personalizado",
+                    description: "Usa métodos individuales para crear un formato: dd/mm/yyyy.",
+                    example: `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`
+                },
+                // Formato largo (toLocaleString)
+                {
+                    function: "toLocaleString()",
+                    description: "Muestra la fecha y hora en formato largo según la configuración regional.",
+                    example: today.toLocaleString("es-ES", { dateStyle: "full", timeStyle: "short" })
+                },
+                // Comparación de fechas
+                {
+                    function: "Comparar fechas",
+                    description: "Verifica si una fecha es anterior o posterior a otra.",
+                    example: (() => {
+                        if (today > pastDate) {
+                            return `La fecha actual (${today.toDateString()}) es posterior a ${pastDate.toDateString()}`;
+                        } else {
+                            return `La fecha actual (${today.toDateString()}) es anterior a ${pastDate.toDateString()}`;
+                        }
+                    })()
+                }
+            ];
+
+            const tableBody = document.getElementById("examplesTable");
+            examples.forEach(({ function: func, description, example }) => {
+                const row = document.createElement("tr");
+
+                const functionCell = document.createElement("td");
+                functionCell.textContent = func;
+
+                const descriptionCell = document.createElement("td");
+                descriptionCell.textContent = description;
+
+                const exampleCell = document.createElement("td");
+                exampleCell.textContent = example;
+
+                row.appendChild(functionCell);
+                row.appendChild(descriptionCell);
+                row.appendChild(exampleCell);
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Generar ejemplos al cargar la página
+        generateAdvancedDateExamples();
+    </script>
+</body>
+</html>

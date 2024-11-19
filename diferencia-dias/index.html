@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diferencia de Días</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Diferencia de Días</h1>
+    <label for="dateInput">Ingresa una fecha:</label>
+    <input type="date" id="dateInput">
+    <button onclick="calculateDays()">Calcular</button>
+    <div id="result"></div>
+
+    <script>
+        function calculateDays() {
+            const dateInput = document.getElementById('dateInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!dateInput) {
+                resultDiv.textContent = 'Por favor, ingresa una fecha válida.';
+                return;
+            }
+
+            const inputDate = new Date(dateInput);
+            const currentDate = new Date();
+            
+            // Restablecer la hora para calcular solo días
+            inputDate.setHours(0, 0, 0, 0);
+            currentDate.setHours(0, 0, 0, 0);
+
+            const diffTime = Math.abs(currentDate - inputDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            resultDiv.textContent = `La diferencia es de ${diffDays} día(s).`;
+        }
+    </script>
+</body>
+</html>

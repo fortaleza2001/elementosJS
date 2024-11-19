@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="fecha" placeholder="dd/mm/aaaa">
+    <button id="boton">Pulsar</button>
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+            let boton=document.getElementById("boton");
+            let cajaFecha=document.getElementById("fecha");
+            boton.addEventListener("click",()=>{
+                let fechaTexto=cajaFecha.value;
+                fechaTextoDividida=fechaTexto.split("/");
+                alert(fechaTextoDividida[1])
+                let fecha=new Date(fechaTextoDividida[2],fechaTextoDividida[1]-1,fechaTextoDividida[0])
+                switch(fecha.getDay()){
+                    case 1: alert("Lunes");
+                    break;
+                    case 2: alert("Martes");
+                    break;
+                    case 3: alert("Miercoles");
+                    break;
+                    case 4: alert("Jueves");
+                    break;
+                    case 5: alert("Viernes");
+                    break;
+                    case 6: alert("Sabado");
+                    break;
+                    case 0: alert("Domingo");
+                    break;
+                    default:
+                        alert("fecha mal introducida");
+                }
+            })
+        })
+    </script>
+</body>
+</html>
